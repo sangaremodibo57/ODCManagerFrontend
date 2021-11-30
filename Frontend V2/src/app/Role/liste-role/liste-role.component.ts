@@ -29,7 +29,9 @@ export class ListeRoleComponent implements OnInit {
 
   deleteRole(data: any){
     this.service.deleteRole(data).subscribe((data: any)=>{
-      this.router.navigate(['liste-role']);
+      window.location.reload();
+      this.router.navigateByUrl('/liste-role', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['liste-role'])); 
     })
   }
 

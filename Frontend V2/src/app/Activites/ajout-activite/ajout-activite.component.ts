@@ -34,24 +34,16 @@ exercice: any;
     this.idExo = form.value['exercice'];
     this.serviceExercice.detailExercice(this.idExo).subscribe((data:any)=>{
       this.exercice =  data;
-      this.activite.date_debut = form.value['date_debut'];
-      this.activite.date_fin = form.value['date_fin'];
+      this.activite.dateDebut = form.value['dateDebut'];
+      this.activite.dateFin = form.value['dateFin'];
       this.activite.etat = form.value['date_etat'];
       this.activite.libelle = form.value['libelle'];
       this.activite.type = form.value['type'];
       this.activite.etat = 'active';
       this.activite.exercice = this.exercice;
-      console.log(this.activite);
-      // this.service.Ajout(this.activite).subscribe((data: any)=> {
-      //         console.log("Activité ajoutée avec succès!");
-      //   this.router.navigate(['liste-activite']);
-      //        // form.reset();
-      // })
+      this.service.Ajout(this.activite).subscribe((data: any)=> {
+        this.router.navigate(['ajout-activite-suite', data.id_activite]);
+      })
     })
-  //   this.service.Ajout(form.value).subscribe(
-  //     ()=> {
-  //       console.log("Activité ajoutée avec succès!");
-  //       form.reset();
-  //     })
   }
 }

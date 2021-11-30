@@ -36,7 +36,7 @@
                                     <a href="" class="active">
                                         <i class="fa fa-search"></i>
                                     </a>
-                                    <input type="text" placeholder="Search..." class="form-control mt-0">
+                                    <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search..." class="form-control mt-0">
                                 </form>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let liste of listAdmin">
+                                <tr *ngFor="let liste of listAdmin | filter:searchText">
                                     <td class="txt-oflo">{{liste.nom}}</td>
                                     <td class="txt-oflo">{{liste.prenom}}</td>
                                     <td class="txt-oflo">{{liste.telephone}}</td>

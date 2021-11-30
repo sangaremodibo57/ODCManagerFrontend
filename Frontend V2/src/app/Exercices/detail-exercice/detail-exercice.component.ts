@@ -10,6 +10,7 @@ import { ExerciceServiceService } from '../Services/exercice-service.service';
 export class DetailExerciceComponent implements OnInit {
   id: any;
   exo: any
+  exerciceActivite: any;
   constructor(
     private service: ExerciceServiceService,
     private route: ActivatedRoute,
@@ -20,7 +21,13 @@ export class DetailExerciceComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.service.detailExercice(this.id).subscribe((data: any)=>{
     this.exo = data;
+    this.service.ExerciceParActivite(this.exo.annee).subscribe((datas: any)=>{
+      this.exerciceActivite = datas;
     })
+   
+    });
+    
+    
   }
 
 }

@@ -28,7 +28,7 @@ export class AjoutExerciceComponent implements OnInit {
         this.exo.annee = form.value['annee'];
         this.exo.date_debut = form.value['date_debut'];
         this.exo.date_fin = form.value['date_fin'];
-        this.exo.statut = 'EnCours';
+        this.exo.statut = 'encours';
         this.exo.etat = 'active';
         this.service.ajoutExercice(this.exo).subscribe((data: any)=>{
         this.exercice = data;

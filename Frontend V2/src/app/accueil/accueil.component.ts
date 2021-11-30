@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActiviteServiceService } from '../Activites/Services/activite-service.service';
+import { AccueilServiceService } from './accueil-service.service';
 
 @Component({
   selector: 'app-accueil',
@@ -6,15 +8,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accueil.component.scss']
 })
 export class AccueilComponent implements OnInit {
-  public activityTotal: any = 0;
-  public activityAchieved: any = 0;
-  public activityPercentage: any = 0;
-  constructor() { }
+  listeAct : any;
+  listes : any;
+  public totalHomme: any;
+  public totalFemme: any;
+  constructor(
+    private mService: AccueilServiceService,
+    private  acservice : ActiviteServiceService,
+    ) { }
 
   ngOnInit(): void {
-    this.activityTotal = 110;
-    this.activityAchieved = 50;
-    this.activityPercentage = Math.floor((this.activityAchieved/this.activityTotal)*100);
+    this.ActiviteOfDate();
+    this.mService.getHomme().subscribe(
+      (result) => {
+        this.totalHomme = result
+      }
+    );
+    this.totalFemme = this.mService.getFemme().subscribe(
+      (result) => {
+        this.totalHomme = result
+      }
+    );
+    console.log(this.totalHomme);
+    console.log(this.totalFemme);
+  }
+
+  ActiviteOfDate(){
+    return this.acservice.getAllList().subscribe((data)=>{
+      this.listeAct = data;
+    })
+  }
+
+   getMonth(date:any) {
+    this.acservice.Month(date.mois).subscribe((data)=> {
+      this.listes = data;
+      console.log(data);
+    })
   }
 
 }

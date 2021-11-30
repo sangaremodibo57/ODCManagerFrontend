@@ -33,6 +33,26 @@ export class ActiviteServiceService {
     return this.http.get(this.url+"/ActiviteById/"+id_activite)
   }
 
+  //Gestion de Log
+  public AjoutLog(data:any) {
+    return this.http.post(this.url+"/addlog", data);
+  }
+
+  //Gestion de participation
+  public AjoutParticipation(data:any) {
+    return this.http.post(this.url+"/ajouteParticipation", data);
+  }
+
+   //Participant par activite
+   public ParticipantParActivite(id_activite:any) {
+    return this.http.get(this.url+"/getParticipantActivite/"+ id_activite);
+  }
+
+  //Responsable par activite
+  public ResponsableParActivite(id_activite: any) {
+    return this.http.get(this.url+"/findLogActivite/"+ id_activite);
+  }
+
   exercice(year:any){
     return this.http.get(this.url+"/activiteByAnnee="+year)
   }
@@ -40,5 +60,5 @@ export class ActiviteServiceService {
   Month(mois:any){
     return this.http.get(this.url+"/actviteByMonth/"+mois)
   }
- 
+
 }

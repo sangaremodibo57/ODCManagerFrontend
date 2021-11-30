@@ -76,6 +76,20 @@ $(function () {
         sparkResize = setTimeout(sparklineLogin, 500);
     });
     sparklineLogin();
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['Task', 'Hours per Day'],
+        ['Homme', 8],
+        ['Femme', 2],
+
+    ]);
+    var options = {'width':350, 'height':220};
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+}
 });
 
 

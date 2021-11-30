@@ -9,6 +9,7 @@ import { ResponsableServiceService } from '../Services/responsable-service.servi
 })
 export class ListeResponsableComponent implements OnInit {
   listeRespon : any;
+  searchText = '';
   constructor(
     private service : ResponsableServiceService,
     private router: Router
@@ -25,9 +26,10 @@ export class ListeResponsableComponent implements OnInit {
   }
 
   deleteResp(data: any){
-    //console.log(data);
     this.service.deleteResponsable(data).subscribe((datas: any)=>{
-      return this.router.navigate(['liste-responsable']);
+      window.location.reload();
+      this.router.navigateByUrl('/liste-responsable', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['liste-responsable'])); 
     })
   }
 

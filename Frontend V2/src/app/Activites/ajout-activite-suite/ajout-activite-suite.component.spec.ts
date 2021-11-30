@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RepportingComponent } from './repporting.component';
+import { AjoutActiviteSuiteComponent } from './ajout-activite-suite.component';
 
-describe('RepportingComponent', () => {
-  let component: RepportingComponent;
-  let fixture: ComponentFixture<RepportingComponent>;
+describe('AjoutActiviteSuiteComponent', () => {
+  let component: AjoutActiviteSuiteComponent;
+  let fixture: ComponentFixture<AjoutActiviteSuiteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RepportingComponent ]
+      declarations: [ AjoutActiviteSuiteComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RepportingComponent);
+    fixture = TestBed.createComponent(AjoutActiviteSuiteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

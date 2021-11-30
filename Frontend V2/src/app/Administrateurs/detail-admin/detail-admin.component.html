@@ -15,28 +15,7 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    <div class="row col-lg-12 col-xlg-12 col-md-12 btnCate">
-        <div class="col-lg-2 col-xlg-1 col-md-1"></div>
-        <div class="col-lg-3 col-xlg-2 col-md-2">
-            <a href="ajout-admin" class="btn btn-primary ">
-                <i class="fas fa-plus" aria-hidden="true"></i>  
-                <b> Ajouter </b>
-            </a>
-        </div>
-        <div class="col-lg-3 col-xlg-2 col-md-2">
-            <a [routerLink]="['/modifier-admin', 1]" class="btn btn-orange text-white">
-                <i class="fas fa-edit" aria-hidden="true"></i>  
-                <b> Modifier </b>
-            </a>
-        </div>
-        <div class="col-lg-3 col-xlg-1 col-md-1">
-            <a href="suprimer-admin" class="btn btn-danger text-white ">
-                <i class="fas fa-trash" aria-hidden="true"></i>  
-                <b> Suprimer </b>
-            </a>
-        </div>
-        <div class="col-lg-1 col-xlg-1 col-md-1"></div>
-    </div>
+    
     <div class="container-fluid">
         <div class="row">
             <!-- Column -->
@@ -55,6 +34,10 @@
                     <div class="user-btm-box mt-5 d-md-flex">
                         <div class="col-md-6 col-sm-6 text-center" style="color: orange;">
                             <p>Ajouté(e) par :</p>
+                                <a [routerLink]="['/modifier-admin', admin.id]" class="btn btn-orange text-white">
+                                    <i class="fas fa-edit" aria-hidden="true"></i>  
+                                    <b> Modifier </b>
+                                </a>
                         </div>
                         <div class="col-md-6 col-sm-6 text-center">
                             <p>Nom_admin</p>

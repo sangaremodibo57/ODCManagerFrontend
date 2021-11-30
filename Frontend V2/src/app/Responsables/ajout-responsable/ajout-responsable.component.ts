@@ -9,7 +9,8 @@ import { ResponsableServiceService } from '../Services/responsable-service.servi
   styleUrls: ['./ajout-responsable.component.scss']
 })
 export class AjoutResponsableComponent implements OnInit {
-  Responsable: any;
+  responsable: any;
+  respons: any;
   erreur = '';
 
   constructor(
@@ -21,13 +22,18 @@ export class AjoutResponsableComponent implements OnInit {
   }
 
   ajoutResponsables(form: NgForm){
-    // if(form.valid){
-      this.service.ajoutResponsale(form.value).subscribe((data:any)=>{
-      this.Responsable=data;
+    this.respons = {
+                    "nom": form.value['nom'], 
+                    "prenom": form.value['prenom'],
+                    "telephone": form.value['telephone'],
+                    "domaine": form.value['domaine'],
+                    "email": form.value['email'],
+                    "etat": "active",
+                    "type": form.value['type'],
+                  };
+      this.service.ajoutResponsale(this.respons).subscribe((data:any)=>{
+      this.responsable = data;
       this.router.navigate(['liste-responsable'])
       });
-    // }else{
-    //   // this.erreur = 'Veuillez remplir tous les champs correctement';
-    // }
   }
 }

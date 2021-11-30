@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActiviteServiceService } from '../Services/activite-service.service';
 
 @Component({
@@ -8,14 +9,18 @@ import { ActiviteServiceService } from '../Services/activite-service.service';
 })
 export class ListeActiviteComponent implements OnInit {
   listes:any;
+  searchText= '';
   
   constructor(
     private service : ActiviteServiceService,
+    private router : Router
+
   ) { }
 
   ngOnInit(): void {
     this.getAll();
   }
+
   getAll(){
     this.service.getAllList().subscribe((data:any)=> {
       this.listes = data;
@@ -23,12 +28,12 @@ export class ListeActiviteComponent implements OnInit {
     })
   }
 
-  deleteList(liste:any){
-    this.service.delete(liste.id_activite).subscribe(
-      (res)=>{
-        console.log(res);
-      }
-    )
+  deleteActivivite(data: any){
+    this.service.delete(data).subscribe((res: any)=>{
+      window.location.reload();
+      this.router.navigateByUrl('/liste-activite', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['liste-activite'])); 
+    })
   }
 
   getExercice(date:any) {
@@ -44,4 +49,5 @@ export class ListeActiviteComponent implements OnInit {
       console.log(data);
     })
   }
+
 }

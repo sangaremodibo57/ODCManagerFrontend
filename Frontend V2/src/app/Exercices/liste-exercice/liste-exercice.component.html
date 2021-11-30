@@ -25,8 +25,19 @@
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <div class="white-box">
                     <div class="d-md-flex mb-3">
-                        <h3 class="box-title mb-0">Liste des exercices</h3>
-                        <div class="col-md-3 col-sm-4 col-xs-6 ms-auto"></div>
+                        <div class="row col-md-12 col-lg-12 col-sm-12">
+                            <div class="col-md-6 col-lg-6 col-sm-6">
+                                <h3 class="box-title mb-0">Liste des exercices</h3>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6">
+                                <form role="search" >
+                                    <a href="" class="active">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                    <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search..." class="form-control mt-0">
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table no-wrap">
@@ -42,7 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let liste of listeExo">
+                                <tr *ngFor="let liste of listeExo | filter:searchText">
                                     <td class="txt-oflo">{{liste.id}}</td>
                                     <td class="txt-oflo">{{liste.annee}}</td>
                                     <td class="txt-oflo">{{liste.date_debut | date: 'dd-M-Y'}}</td>

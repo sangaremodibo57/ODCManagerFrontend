@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import{ HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +34,9 @@ import { AjoutRoleComponent } from './Role/ajout-role/ajout-role.component';
 import { DetailRoleComponent } from './Role/detail-role/detail-role.component';
 import { ModifierRoleComponent } from './Role/modifier-role/modifier-role.component';
 import { ListeRoleComponent } from './Role/liste-role/liste-role.component';
+import { AjoutActiviteSuiteComponent } from './Activites/ajout-activite-suite/ajout-activite-suite.component';
+import { AjoutResponsableActiviteComponent } from './Activites/ajout-responsable-activite/ajout-responsable-activite.component';
+import { AjoutParticipantFichierComponent } from './Participants/ajout-participant-fichier/ajout-participant-fichier.component';
 
 
 @NgModule({
@@ -66,13 +70,17 @@ import { ListeRoleComponent } from './Role/liste-role/liste-role.component';
     DetailRoleComponent,
     ModifierRoleComponent,
     ListeRoleComponent,
+    AjoutActiviteSuiteComponent,
+    AjoutResponsableActiviteComponent,
+    AjoutParticipantFichierComponent,
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    Ng2SearchPipeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

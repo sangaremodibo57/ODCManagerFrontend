@@ -17,7 +17,7 @@ export class ExerciceServiceService {
     }
 
     //Declaration de la fonction ajoutExercice pour envoyer les données dans la base des données
-    ajoutExercice(data:any){
+    ajoutExercice(data: any){
       return this.http.post(this.url+'/ajoutExercice', data);
     }
 
@@ -27,6 +27,15 @@ export class ExerciceServiceService {
 
     updateExercice(id:any, data: any){
       return this.http.put(this.url+`/updateExercice/${id}`, data);
+    }
+
+    deleteExercice(id:any){
+      return this.http.delete(this.url+`/supprimerExercice/${id}`);
+    }
+
+    //activités par exercice
+    public ExerciceParActivite(annee:any) {
+      return this.http.get(this.url+"/activiteByAnnee="+ annee);
     }
 
 

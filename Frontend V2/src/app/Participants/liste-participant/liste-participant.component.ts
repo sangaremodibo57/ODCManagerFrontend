@@ -11,9 +11,12 @@ export class ListeParticipantComponent implements OnInit {
   listpart: any;
   id: any;
   participant:any;
+  searchText=''; 
+  
   constructor(
     private service : ParticipantServiceService,
-    public route: Router,
+    private route: Router,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -23,9 +26,16 @@ export class ListeParticipantComponent implements OnInit {
   
   async listepart(){
     this.service.listeparticipant().subscribe((res:any) =>{
-      this.listpart = res;
-      //console.log(this.listpart);
-      
+      this.listpart = res;      
     })
+  }
+
+  delete(data: any){
+    this.service.deleteParticipant(data).subscribe((datas: any)=>{
+      window.location.reload();
+      this.router.navigateByUrl('/liste-participant', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['liste-participant'])); 
+    })
+   
   }
 }

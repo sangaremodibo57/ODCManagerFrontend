@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccueilComponent } from './accueil/accueil.component';
+import { AjoutActiviteSuiteComponent } from './Activites/ajout-activite-suite/ajout-activite-suite.component';
 import { AjoutActiviteComponent } from './Activites/ajout-activite/ajout-activite.component';
+import { AjoutResponsableActiviteComponent } from './Activites/ajout-responsable-activite/ajout-responsable-activite.component';
 import { DetailActiviteComponent } from './Activites/detail-activite/detail-activite.component';
 import { ListeActiviteComponent } from './Activites/liste-activite/liste-activite.component';
 import { ModifierActiviteComponent } from './Activites/modifier-activite/modifier-activite.component';
@@ -14,6 +16,7 @@ import { DetailExerciceComponent } from './Exercices/detail-exercice/detail-exer
 import { ListeExerciceComponent } from './Exercices/liste-exercice/liste-exercice.component';
 import { ModifierExerciceComponent } from './Exercices/modifier-exercice/modifier-exercice.component';
 import { LoginComponent } from './Login/login/login.component';
+import { AjoutParticipantFichierComponent } from './Participants/ajout-participant-fichier/ajout-participant-fichier.component';
 import { AjoutParticipantComponent } from './Participants/ajout-participant/ajout-participant.component';
 import { DetailParticipantComponent } from './Participants/detail-participant/detail-participant.component';
 import { ListeParticipantComponent } from './Participants/liste-participant/liste-participant.component';
@@ -43,6 +46,8 @@ const routes: Routes = [
   { path: 'ajout-activite', component: AjoutActiviteComponent },
   { path: 'modifier-activite/:id', component: ModifierActiviteComponent },
   { path: 'detail-activite/:id', component: DetailActiviteComponent },
+  { path: 'ajout-activite-suite/:id', component: AjoutActiviteSuiteComponent },
+  { path: 'ajout-activite-responsable/:id', component: AjoutResponsableActiviteComponent },
 
     // Gestion Excercices
   { path: 'liste-exercice', component: ListeExerciceComponent },
@@ -52,9 +57,10 @@ const routes: Routes = [
 
    // Gestion Participants
    { path: 'liste-participant', component: ListeParticipantComponent },
-   { path: 'ajout-participant', component: AjoutParticipantComponent },
+   { path: 'ajout-participant/:id', component: AjoutParticipantComponent },
    { path: 'modifier-participant/:id', component: ModifierParticipantComponent },
    { path: 'detail-participant/:id', component: DetailParticipantComponent },
+   { path: 'ajout-participant-fichier/:id', component: AjoutParticipantFichierComponent },
 
   // Gestion Responsables
   { path: 'liste-responsable', component: ListeResponsableComponent },

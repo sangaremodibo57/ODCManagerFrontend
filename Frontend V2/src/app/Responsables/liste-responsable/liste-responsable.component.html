@@ -36,7 +36,7 @@
                                     <a href="" class="active">
                                         <i class="fa fa-search"></i>
                                     </a>
-                                    <input type="text" placeholder="Search..." class="form-control mt-0">
+                                    <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search..." class="form-control mt-0">
                                 </form>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor='let liste of listeRespon' >
+                                <tr *ngFor='let liste of listeRespon | filter:searchText' >
                                     <td class="txt-oflo">
                                        <img src="../../assets/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle">
                                     </td>
@@ -67,7 +67,7 @@
                                             <a [routerLink]="['/modifier-responsable', liste.id_responsable]"> <i class="fa fa-edit" aria-hidden="true"></i></a>
                                             <a (click)="deleteResp(liste.id_responsable)"><i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="return(confirm('Êtes-vous certain de vouloir supprimer ce responsable ?'))"></i></a>
                                             <a [routerLink]="['/detail-responsable', liste.id_responsable]"><i style="color: #03224c;" class="fas fa-info-circle" aria-hidden="true"></i></a>
-                                        </span>
+                                         </span>
                                     </td>
                                 </tr>
                                 

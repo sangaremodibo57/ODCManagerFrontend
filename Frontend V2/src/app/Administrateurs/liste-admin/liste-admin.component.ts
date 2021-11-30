@@ -9,6 +9,7 @@ import { ServiceAdminService } from '../Services/service-admin.service';
 })
 export class ListeAdminComponent implements OnInit {
   listAdmin: any;
+  searchText= '';
 
   constructor(
     private service : ServiceAdminService,
@@ -26,9 +27,10 @@ export class ListeAdminComponent implements OnInit {
   }
 
   deleteAdmin(data: any){
-    //console.log(data);
     this.service.deleteAdmin(data).subscribe((datas: any)=>{
-      this.router.navigate(['liste-admin']);
+      window.location.reload();
+      this.router.navigateByUrl('/liste-admin', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['liste-admin'])); 
     });
    
   }

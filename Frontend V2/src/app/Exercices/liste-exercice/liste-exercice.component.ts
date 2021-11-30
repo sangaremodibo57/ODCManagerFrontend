@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ExerciceServiceService } from '../Services/exercice-service.service';
 
 @Component({
@@ -8,8 +9,10 @@ import { ExerciceServiceService } from '../Services/exercice-service.service';
 })
 export class ListeExerciceComponent implements OnInit {
   listeExo : any;
+  searchText= '';
   constructor(
-    private service: ExerciceServiceService
+    private service: ExerciceServiceService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +27,13 @@ export class ListeExerciceComponent implements OnInit {
   }
 
   deleteExercice(data: any){
-   // this.service.
+    this.service.deleteExercice(data).subscribe((datas: any)=>{
+      window.location.reload();
+      this.router.navigateByUrl('/liste-exercice', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['liste-exercice'])); 
+
+    })
+
   }
 
 }

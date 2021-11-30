@@ -65,12 +65,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="txt-oflo">{{exo.annee}}</td>
-                                    <td class="txt-oflo">{{exo.date_debut | date: 'dd-M-Y'}}</td>
-                                    <td class="txt-oflo">{{exo.date_fin | date: 'dd-M-Y'}}</td>
-                                    <td class="txt-oflo">{{exo.etat}}</td>
-                                    <td class="txt-oflo">{{exo.statut}}</td>
+                                <tr *ngFor="let act of exerciceActivite">
+                                    <td class="txt-oflo">{{act.libelle}}</td>
+                                    <td class="txt-oflo">{{act.type}}</td>
+                                    <td class="txt-oflo">{{act.dateDebut | date: 'dd-M-Y'}}</td>
+                                    <td class="txt-oflo">{{act.dateFin | date: 'dd-M-Y'}}</td>
+                                    <td class="txt-oflo">{{act.etat}}</td>
+                                    <td class="txt-oflo">
+                                        <a [routerLink]="['/detail-activite', act.id_activite]"><i style="color: #03224c;" class="fas fa-info-circle" aria-hidden="true"></i></a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

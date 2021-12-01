@@ -90,26 +90,42 @@
                                     <input type="text" placeholder="domaine"
                                     class="form-control p-0 border-0" name="domaine" [(ngModel)]="respons.domaine" #domaine="ngModel">
                                 </div>
-                                <p *ngIf="domaine.invalid && (nom.dirty || nom.touched)" class="alert">
+                                <p *ngIf="domaine.invalid && (domaine.dirty || domaine.touched)" class="alert">
                                     <b *ngIf="domaine.errors?.['required']">
                                         Ce champ est obligatoire !
                                     </b>
                                 </p>
                             </div>
-                            <div class="form-group mb-4">
+                            <!-- <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">Type</label>
                                 <div class="col-md-12 border-bottom p-0">
                                     <input type="text" placeholder="Etat"
                                     class="form-control p-0 border-0" name="etat" [(ngModel)]="respons.type">
                                 </div>
-                            </div>
+                            </div> -->
+
                             <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">Type</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                        <select  class="form-control p-0 border-0" name="type" id="singleSelect" required [(ngModel)]="respons.type" #type="ngModel">
+                                            <option value="">Selectionner un type</option> 
+                                            <option >Formateur</option>
+                                            <option >Intervenant</option>
+                                        </select>
+                                </div>
+                                <p *ngIf="type.invalid && (type.dirty || type.touched)" class="alert">
+                                    <b *ngIf="type.errors?.['required']">
+                                        Ce champ est obligatoire !
+                                    </b>
+                                </p>
+                            </div>
+                            <!-- <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">Photo</label>
                                 <div class="col-md-12 border-bottom p-0">
                                     <input type="text" placeholder="photo"
                                     class="form-control p-0 border-0" name="type" [(ngModel)]="respons.photo">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group mb-4">
                                 <div class="col-sm-12 align-button">
                                     <button class="btn btn-warning" type="submit" >Modifier</button>

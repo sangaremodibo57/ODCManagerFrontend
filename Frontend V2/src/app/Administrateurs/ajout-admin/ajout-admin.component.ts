@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Administrateur } from 'src/app/Models/Administrateur';
-import { Role } from 'src/app/Models/Role';
 import { RoleServiceService } from 'src/app/Role/Services/role-service.service';
 import { ServiceAdminService } from '../Services/service-admin.service';
 
@@ -17,6 +16,7 @@ export class AjoutAdminComponent implements OnInit {
   admin = new Administrateur();
   role: any;
   adm: any;
+  ad: any;
   idRole: any;
 
   nom: any;
@@ -41,8 +41,9 @@ export class AjoutAdminComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.adminConnect =  localStorage.getItem('userData');
-    console.log("userConnect=======", JSON.parse(this.adminConnect));
+    this.ad =  localStorage.getItem('userData');
+    this.adminConnect = JSON.parse(this.ad);
+    console.log("userConnect=======", this.adminConnect);
 
   }
 

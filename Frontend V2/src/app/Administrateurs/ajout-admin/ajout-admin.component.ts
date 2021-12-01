@@ -26,6 +26,8 @@ export class AjoutAdminComponent implements OnInit {
   telephone: any;
   email: any;
   etat: any;
+  adminConnect: any;
+
 
   constructor(
     private serviceRole : RoleServiceService,
@@ -38,7 +40,11 @@ export class AjoutAdminComponent implements OnInit {
     });;
    }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.adminConnect =  localStorage.getItem('userData');
+    console.log("userConnect=======", JSON.parse(this.adminConnect));
+
+  }
 
   ajoutAdmin(form : NgForm){
 

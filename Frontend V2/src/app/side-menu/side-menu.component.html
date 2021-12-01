@@ -15,7 +15,7 @@
                                 <span class="hide-menu"><b>Accueil</b></span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" *ngIf="adminConnect.role.libelle === 'SuperAdmin'">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="liste-admin" aria-expanded="false">
                                 <i class="fa fa-users" aria-hidden="true"></i>
                                 <span class="hide-menu"><b>Gestion Administrateurs</b></span>
@@ -51,7 +51,7 @@
                                 <span class="hide-menu"><b>Reporting</b></span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" *ngIf="adminConnect.role.libelle === 'SuperAdmin'">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="liste-role" aria-expanded="false">
                                 <i class="fas fa-chess" aria-hidden="true"></i>
                                 <span class="hide-menu"><b>Rôles</b></span>

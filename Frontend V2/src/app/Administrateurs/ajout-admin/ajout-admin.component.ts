@@ -12,6 +12,7 @@ import { ServiceAdminService } from '../Services/service-admin.service';
   styleUrls: ['./ajout-admin.component.scss']
 })
 export class AjoutAdminComponent implements OnInit {
+  admins = {nom: '', prenom: '', telephone: '', email: '', role: '',login:''}
   listeRole : any;
   admin = new Administrateur();
   role: any;

@@ -79,7 +79,7 @@
                             <p style="font-weight: bold; color: red;">(*) champ obligatoire</p>
                             <div class="form-group mb-4">
                                 <div class="col-sm-12 align-button">
-                                    <button class="btn btn-warning" type="submit">Ajouter</button>
+                                    <button class="btn btn-warning" type="submit" [disabled]="AjoutForm.form.invalid">Suivant</button>
                                 </div>
                             </div>
                         </form>

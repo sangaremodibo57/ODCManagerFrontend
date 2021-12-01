@@ -12,6 +12,7 @@ import { ServiceAdminService } from '../Services/service-admin.service';
   styleUrls: ['./ajout-admin.component.scss']
 })
 export class AjoutAdminComponent implements OnInit {
+  admins = {nom: '', prenom: '', telephone: '', email: '', role: '',login:''}
   listeRole : any;
   admin = new Administrateur();
   role: any;
@@ -25,6 +26,8 @@ export class AjoutAdminComponent implements OnInit {
   telephone: any;
   email: any;
   etat: any;
+  adminConnect: any;
+
 
   constructor(
     private serviceRole : RoleServiceService,
@@ -37,7 +40,11 @@ export class AjoutAdminComponent implements OnInit {
     });;
    }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.adminConnect =  localStorage.getItem('userData');
+    console.log("userConnect=======", JSON.parse(this.adminConnect));
+
+  }
 
   ajoutAdmin(form : NgForm){
 

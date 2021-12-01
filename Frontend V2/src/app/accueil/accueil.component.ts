@@ -17,7 +17,7 @@ export class AccueilComponent implements OnInit {
     private  acservice : ActiviteServiceService,
     ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.ActiviteOfDate();
     this.mService.getHomme().subscribe(
       (result) => {

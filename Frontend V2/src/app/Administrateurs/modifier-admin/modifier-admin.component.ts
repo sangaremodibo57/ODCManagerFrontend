@@ -10,6 +10,8 @@ import { ServiceAdminService } from '../Services/service-admin.service';
 export class ModifierAdminComponent implements OnInit {
 id: any;
 admin: any
+admins = {nom: '', prenom: '', telephone: '', email: '', role: '',login:''}
+
   constructor(
     private service: ServiceAdminService,
     private route: ActivatedRoute,

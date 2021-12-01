@@ -9,7 +9,6 @@ import { ResponsableServiceService } from '../Services/responsable-service.servi
   styleUrls: ['./ajout-responsable.component.scss']
 })
 export class AjoutResponsableComponent implements OnInit {
-  admins = {nom: '', prenom: '', telephone: '', email: '', domaine: '',type:''}
   responsable: any;
   respons: any;
   erreur = '';

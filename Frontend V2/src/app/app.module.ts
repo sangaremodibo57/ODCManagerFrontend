@@ -37,6 +37,7 @@ import { ListeRoleComponent } from './Role/liste-role/liste-role.component';
 import { AjoutActiviteSuiteComponent } from './Activites/ajout-activite-suite/ajout-activite-suite.component';
 import { AjoutResponsableActiviteComponent } from './Activites/ajout-responsable-activite/ajout-responsable-activite.component';
 import { AjoutParticipantFichierComponent } from './Participants/ajout-participant-fichier/ajout-participant-fichier.component';
+import { ProfilUserComponent } from './UserProfil/profil-user/profil-user.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { AjoutParticipantFichierComponent } from './Participants/ajout-participa
     AjoutActiviteSuiteComponent,
     AjoutResponsableActiviteComponent,
     AjoutParticipantFichierComponent,
+    ProfilUserComponent,
    
   ],
   imports: [

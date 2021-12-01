@@ -15,6 +15,8 @@ export class AjoutResponsableActiviteComponent implements OnInit {
   respons: any;
   responsable: any;
   logActivite: any;
+  responsableParActivite: any;
+  errorEmailResp: any;
 
   constructor(
     private service: ActiviteServiceService,
@@ -28,6 +30,11 @@ export class AjoutResponsableActiviteComponent implements OnInit {
     this.service.detail(this.id).subscribe((data: any)=>{
       this.activite = data;
     });
+
+    this.service.ResponsableParActivite(this.id).subscribe((data:any)=>{
+      this.responsableParActivite = data;
+      console.log(this.responsableParActivite);
+    })
   }
 
   ajoutResponsables(form: NgForm){
@@ -40,14 +47,19 @@ export class AjoutResponsableActiviteComponent implements OnInit {
                     "etat": "active",
                     "type": form.value['type'],
                   };
-      this.serviceResponsable.ajoutResponsale(this.respons).subscribe((data:any)=>{
-      this.responsable = data;
-        this.logActivite = {"responsable": this.responsable, "activite": this.activite}
-        this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
-          this.router.navigate(['liste-activite'])
-        })
+  for(let i=0; i<this.responsableParActivite.length; i++){
+    if(this.responsableParActivite[i].activite.email == form.value['email']){
+      this.errorEmailResp = "Ce Responsable existe déjà !"
+    }
+  }
+      // this.serviceResponsable.ajoutResponsale(this.respons).subscribe((data:any)=>{
+      // this.responsable = data;
+      //   this.logActivite = {"responsable": this.responsable, "activite": this.activite}
+      //   this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
+      //     this.router.navigate(['liste-activite'])
+      //   })
       
-      });
+      // });
   }
 
 }

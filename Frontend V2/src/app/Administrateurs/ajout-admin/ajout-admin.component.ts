@@ -18,6 +18,9 @@ export class AjoutAdminComponent implements OnInit {
   adm: any;
   ad: any;
   idRole: any;
+  verifieLogin: any;
+  errorLogin ='';
+  errorEmail ='';
 
   nom: any;
   prenom: any;
@@ -45,6 +48,12 @@ export class AjoutAdminComponent implements OnInit {
     this.adminConnect = JSON.parse(this.ad);
     console.log("userConnect=======", this.adminConnect);
 
+    this.serviceAdmin.listeAdmin().subscribe((datas: any)=>{
+         this.verifieLogin = datas;
+         console.log("Adminnnnnnnn",  this.verifieLogin);
+    })
+
+
   }
 
   ajoutAdmin(form : NgForm){
@@ -70,11 +79,28 @@ export class AjoutAdminComponent implements OnInit {
        this.admin.login= this.login;
        this.admin.password= this.password;
        this.admin.role= this.role;
-       this.serviceAdmin.ajoutAdmin(this.admin).subscribe((data: any)=>{
-         this.adm = data;
-         console.log("-----------", this.adm);
-         this.router.navigate(['liste-admin']);
-       })
+      
+       for(let i=0; i<this.verifieLogin.length; i++){
+         if(this.verifieLogin[i].login == form.value['login']){
+          this.errorLogin = "Ce Login existe déjà !"
+         }
+         if(this.verifieLogin[i].email == form.value['email']){
+          this.errorEmail = "Cet email est déjà utilisé !"
+         }
+       }
+       if(this.errorLogin == ''){
+         if(this.errorEmail == ''){
+          this.serviceAdmin.ajoutAdmin(this.admin).subscribe((data: any)=>{
+            this.adm = data;
+            console.log("-----------", this.adm);
+            this.router.navigate(['liste-admin']);
+            })
+         }else{
+          this.errorEmail = "Cet email est déjà utilisé !"
+         }
+       }else{
+        this.errorLogin = "Ce Login existe déjà !"
+       }
     });
    }
 }

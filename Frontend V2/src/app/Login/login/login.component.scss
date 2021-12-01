@@ -20,7 +20,7 @@ body{
     width: 45%;
 }
 .card{
-    height: 510px;
+   height: 99%;
 }
 .formContent{
     width: 50%;
@@ -30,5 +30,11 @@ h1{
 }
 .btnC{
     background-color: rgb(223, 91, 4);
-    color: white; 
+    color: white;
+    display: block;
+    margin: 0 auto; 
+    margin-top: 2%;
+}
+label{
+    margin-top: 10%;
 }

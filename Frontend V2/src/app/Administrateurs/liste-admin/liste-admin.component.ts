@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceAdminService } from '../Services/service-admin.service';
 
 @Component({
@@ -8,12 +8,12 @@ import { ServiceAdminService } from '../Services/service-admin.service';
   styleUrls: ['./liste-admin.component.scss']
 })
 export class ListeAdminComponent implements OnInit {
-  listAdmin: any;
+  listAdmin: any = [];
   searchText= '';
 
   constructor(
     private service : ServiceAdminService,
-    private router : Router
+    private router : Router,
   ) { }
 
   ngOnInit(): void {
@@ -22,16 +22,24 @@ export class ListeAdminComponent implements OnInit {
 
   async listeAdm(){
       return this.service.listeAdmin().subscribe((data: any)=>{
-        this.listAdmin = data;
+        let liste = data;
+        for(let i=0; i<liste.length; i++){
+          if(liste[i].etat == 'active')
+          this.listAdmin.push(liste[i]);
+        }
       })
   }
 
   deleteAdmin(data: any){
-    this.service.deleteAdmin(data).subscribe((datas: any)=>{
-      window.location.reload();
+    this.service.detailAdmin(data).subscribe((datas: any)=>{
+      datas.etat = "inactive";
+      let datasMod = datas;
+      console.log(datasMod);
+      this.service.updateAdmin(datasMod.id, datasMod).subscribe((mod: any)=>{
+        window.location.reload();
       this.router.navigateByUrl('/liste-admin', {skipLocationChange: true}).then(()=>
       this.router.navigate(['liste-admin'])); 
-    });
-   
+      })
+    })
   }
 }

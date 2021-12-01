@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { ExerciceServiceService } from 'src/app/Exercices/Services/exercice-service.service';
 import { Activite } from 'src/app/Models/Activite';
 import { Exercice } from 'src/app/Models/Exercice';
@@ -16,6 +17,7 @@ listeExo: any;
 activite = new Activite();
 idExo: any;
 exercice: any;
+erreur= '';
 
   constructor(
     private service: ActiviteServiceService,
@@ -31,19 +33,27 @@ exercice: any;
   }
 
   AjoutActivite(form:NgForm) {
-    this.idExo = form.value['exercice'];
-    this.serviceExercice.detailExercice(this.idExo).subscribe((data:any)=>{
-      this.exercice =  data;
-      this.activite.dateDebut = form.value['dateDebut'];
-      this.activite.dateFin = form.value['dateFin'];
-      this.activite.etat = form.value['date_etat'];
-      this.activite.libelle = form.value['libelle'];
-      this.activite.type = form.value['type'];
-      this.activite.etat = 'active';
-      this.activite.exercice = this.exercice;
-      this.service.Ajout(this.activite).subscribe((data: any)=> {
-        this.router.navigate(['ajout-activite-suite', data.id_activite]);
-      })
-    })
+    if(form.valid){
+      if(moment(form.value['dateDebut']).isBefore(form.value['dateFin'])) {
+        this.idExo = form.value['exercice'];
+        this.serviceExercice.detailExercice(this.idExo).subscribe((data:any)=>{
+          this.exercice =  data;
+          this.activite.dateDebut = form.value['dateDebut'];
+          this.activite.dateFin = form.value['dateFin'];
+          // this.activite.etat = form.value['date_etat'];
+          this.activite.libelle = form.value['libelle'];
+          this.activite.type = form.value['type'];
+          this.activite.etat = 'active';
+          this.activite.exercice = this.exercice;
+          this.service.Ajout(this.activite).subscribe((data: any)=> {
+            console.log(data);
+            this.router.navigate(['ajout-activite-suite', data.id_activite]);
+          })
+        })
+      }
+      else{
+        this.erreur = 'La date de debut doit être inferieure à la date de fin';
+    }
+  }
   }
 }

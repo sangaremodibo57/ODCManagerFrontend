@@ -18,7 +18,6 @@ export class AccueilComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.getAll();
     this.ActiviteOfDate();
     this.mService.getHomme().subscribe(
       (result) => {
@@ -44,13 +43,6 @@ export class AccueilComponent implements OnInit {
     this.acservice.Month(date.mois).subscribe((data)=> {
       this.listes = data;
       
-    })
-  }
-
-  getAll(){
-    this.acservice.getAllList().subscribe((data:any)=> {
-      this.listes = data;
-      console.log('-----------' ,data.length);
     })
   }
 

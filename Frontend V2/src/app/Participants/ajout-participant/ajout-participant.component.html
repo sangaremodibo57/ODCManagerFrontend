@@ -16,11 +16,48 @@
             <div class="col-md-3 col-lg-3 col-sm-3"></div>
             <div class="col-md-6 col-lg-6 col-sm-6 white-box">
                 <div class="col-md-6 col-lg-6 col-sm-6">
-                    <h3 class="box-title mb-0">Activité N° :  <b style="color: orange;">00{{activite.id_activite}}</b></h3>
+                    <h3 class="box-title mb-0">Activité N°:  <b style="color: orange;">00{{activite.id_activite}}</b></h3>
                     <h3 class="box-title mb-0">Libellé : <b style="color: orange;">{{activite.libelle}}</b></h3>
                 </div>
             </div>
             <div class="col-md-3 col-lg-3 col-sm-3"></div>
+        </div>
+        
+        <div class="row" *ngIf="errorPart1 || errorPart2">
+            <div class="col-md-2 col-lg-2 col-sm-2"></div>
+            <div class="col-md-8 col-lg-8 col-sm-8 white-box">
+                    <p style="color: red; text-align: center;"><b>{{errorPart1}}</b></p>
+                    <p style="color: red; text-align: center;"><b>{{errorPart2}}</b></p>
+                    
+                    <div class="table-responsive" *ngIf="!errorPart2">
+                        <table class="table no-wrap">
+                            <thead>
+                                <tr>
+                                    
+                                    <th class="border-top-0"><b>Nom</b></th>
+                                    <th class="border-top-0"><b>Téléphone</b></th>
+                                    <th class="border-top-0"><b>Email</b></th>
+                                    <th class="border-top-0"><b>Genre</b></th>
+                                    <th class="border-top-0" ><b>Action</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                     <td class="txt-oflo">{{participantTrouve.nom_complet}}</td>
+                                     <td class="txt-oflo">{{participantTrouve.telephone}}</td>
+                                     <td class="txt-oflo">{{participantTrouve.email}}</td>
+                                     <td class="txt-oflo">{{participantTrouve.participantGenre}}</td>
+                                     <td>
+                                         <span class="text-success alignement">
+                                            <button class="btn btn-warning" type="submit" >Affecter</button>
+                                         </span>
+                                     </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-2"></div>
         </div>
         <div class="row">
             <div class="col-lg-3 col-xlg-3 col-md-12"></div>

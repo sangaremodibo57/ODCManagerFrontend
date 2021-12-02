@@ -63,8 +63,8 @@ export class AjoutActiviteSuiteComponent implements OnInit {
      for(let j =0; j<this.responsableParActivite.length; j ++){
        this.emailResp.push(this.responsableParActivite[j].responsable.email)
      }
-     //console.log(this.emailResp);
-    
+
+     //Verifi si l'email est existant
     for(let i = 0; i<this.selected.length; i ++){
       if(this.emailResp.includes(this.selected[i].email)){
         this.tabError.push('erreur '+ this.selected[i].prenom + ' ' + this.selected[i].nom + ' est déjà affecté à cet activité');
@@ -76,7 +76,6 @@ export class AjoutActiviteSuiteComponent implements OnInit {
       })
       } 
     }
-   // console.log(this.tabError);
   }
 
 }

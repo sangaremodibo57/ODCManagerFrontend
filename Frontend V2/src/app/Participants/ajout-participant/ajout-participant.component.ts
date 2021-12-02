@@ -11,9 +11,15 @@ import { ParticipantServiceService } from '../Services/participant-service.servi
 })
 export class AjoutParticipantComponent implements OnInit {
   participant:any;
+  participantTrouve: any;
   id: any;
   activite: any;
   participation: any;
+  emailParticipant: any = [];
+  emailParticipantPart: any = [];
+  errorPart1 = '';
+  errorPart2 = '';
+  listeParticipant: any;
 
   constructor(
     private service: ParticipantServiceService,
@@ -26,6 +32,11 @@ export class AjoutParticipantComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.serviceAct.detail(this.id).subscribe((data: any)=>{
       this.activite = data;
+      this.serviceAct.ParticipantParActivite(this.activite.id_activite).subscribe((datas: any)=>{
+        for(let i = 0; i<datas.length; i ++){
+          this.emailParticipantPart.push(datas[i].participant.email);
+        }
+      })
     });
   }
 
@@ -33,14 +44,46 @@ export class AjoutParticipantComponent implements OnInit {
     
     this.service.ajoutParticipant(form.value).subscribe((app: any) =>{
       this.participant = app;
-      console.log(this.participant);
-      this.participation = {"participant": this.participant, "activite": this.activite};
-      this.serviceAct.AjoutParticipation(this.participation).subscribe((data: any)=>{
-        this.router.navigateByUrl('detail-activite/'+ this.activite.id_activite, {skipLocationChange: true}).then(()=>
-        this.router.navigate(['detail-activite', this.activite.id_activite])); 
-      })
+
+      //recuperation des participants
+      this.service.listeparticipant().subscribe((datas: any)=>{
+          this.listeParticipant = datas;
+
+      //Verification si l'email de participant existe deja dans la table participant
+      for(let i = 0; i<this.listeParticipant.length; i ++){
+        if(this.listeParticipant[i].email == form.value['email']){
+          this.errorPart1 =  "Ce participant existe déjà !";
+
+          //on recupère les informations de l'apprenant trouvé
+          this.participantTrouve = this.listeParticipant[i];
+          }
+        }
+
+      //Verification si l'email de participant existe deja dans la table participation
+      if(this.emailParticipantPart.includes(form.value['email'])){
+        this.errorPart2 = "Ce participant est déjà affecté à cet activité !";        
+      }
+
       
-    })
+      if(this.errorPart2 != ''){
+        this.errorPart2 = "Ce participant est déjà affecté à cet activité !";
+        this.errorPart1 ='';
+      }else{
+        if(this.errorPart1 !=''){
+          this.errorPart1 =  "Ce participant existe déjà !";
+        }else{
+
+          //si les  messages d'erreurs sont vides alors on enregistre l'apprenant et l'affecte à l'activité
+          this.participation = {"participant": this.participant, "activite": this.activite};
+          this.serviceAct.AjoutParticipation(this.participation).subscribe((data: any)=>{
+          this.router.navigateByUrl('detail-activite/'+ this.activite.id_activite, {skipLocationChange: true}).then(()=>
+          this.router.navigate(['detail-activite', this.activite.id_activite])); 
+          })
+        }
+       }
+      
+    });
+  });
     
   }
 

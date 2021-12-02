@@ -21,8 +21,8 @@ export class AjoutResponsableActiviteComponent implements OnInit {
   responsableParActivite: any;
   responsableParRes: any;
   
-  errorEmailResp!: Message[];
-  errorEmailResp1!: Message[];
+  errorEmailResp = '';
+  errorEmailResp1 ='';
   respExistant: any;
   res: any;
 
@@ -63,14 +63,14 @@ export class AjoutResponsableActiviteComponent implements OnInit {
 
   for(let i=0; i<this.responsableParActivite.length; i++){    
     if(this.responsableParActivite[i].responsable.email == form.value['email']){
-      this.errorEmailResp = [{detail: "Ce Responsable est déjà affecté à cet activité !"}];
+      this.errorEmailResp = "Ce Responsable est déjà affecté à cet activité !";
       console.log(this.errorEmailResp);
     }
   }
 
   for(let i=0; i<this.responsableParRes.length; i++){    
     if(this.responsableParRes[i].email == form.value['email']){
-      this.errorEmailResp1 = [{detail: "Ce Responsable existe déjà !"}];
+      this.errorEmailResp1 =  "Ce Responsable existe déjà !";
       this.serviceResponsable.detailResponsable(this.responsableParRes[i].id_responsable).subscribe((data: any)=>{
         console.log(data);
         this.respExistant = data;
@@ -79,21 +79,24 @@ export class AjoutResponsableActiviteComponent implements OnInit {
     }
   }
   
-  if(this.errorEmailResp1 != []){
-    if(this.errorEmailResp != []){
-      this.serviceResponsable.ajoutResponsale(this.respons).subscribe((data:any)=>{
-        this.responsable = data;
+  if(this.errorEmailResp != ''){
+    this.errorEmailResp =  "Ce Responsable est déjà affecté à cet activité !";
+    this.errorEmailResp1 = '';
+  }else{
+        if(this.errorEmailResp1 != ''){
+          this.errorEmailResp1 = "Ce Responsable existe déjà !";
+        }else{
+          this.serviceResponsable.ajoutResponsale(this.respons).subscribe((data:any)=>{
+          this.responsable = data;
           this.logActivite = {"responsable": this.responsable, "activite": this.activite}
           this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
-            this.router.navigate(['liste-activite'])
-          })
-        });
-    }else{
-      this.errorEmailResp =  [{detail: "Ce Responsable est déjà affecté à cet activité !"}];
+          this.router.navigate(['liste-activite'])
+        })
+      });
+        }
     }
-  }else{
-    this.errorEmailResp1 = [{detail: "Ce Responsable existe déjà !"}];
-  }
+  
+  
   }
 
   affecterResp(data: any){

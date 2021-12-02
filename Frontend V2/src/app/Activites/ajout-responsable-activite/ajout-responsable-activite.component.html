@@ -24,19 +24,19 @@
             </div>
             <div class="col-md-3 col-lg-3 col-sm-3"></div>
         </div>
-        <div class="row" *ngIf="errorEmailResp || errorEmailResp1">
+        <div class="row" *ngIf="errorEmailResp|| errorEmailResp1">
             <div class="col-md-2 col-lg-2 col-sm-2"></div>
             <div class="col-md-8 col-lg-8 col-sm-8 white-box">
-                    <!-- <p style="color: red; text-align: center;"><b>{{errorEmailResp}}</b></p>
-                    <p style="color: red; text-align: center;"><b>{{errorEmailResp1}}</b></p> -->
-                    <p-messages style="color: red; text-align: center;" [(value)]="errorEmailResp" 
+                    <p style="color: red; text-align: center;"><b>{{errorEmailResp}}</b></p>
+                    <p style="color: red; text-align: center;"><b>{{errorEmailResp1}}</b></p> 
+                    <!-- <p-messages style="color: red; text-align: center;" [(value)]="errorEmailResp" 
                         [enableService]="false">
                     </p-messages>
                     <p-messages style="color: red; text-align: center;"  [(value)]="errorEmailResp1" 
                         [enableService]="false">
-                    </p-messages>
+                    </p-messages> -->
                     
-                    <div class="table-responsive">
+                    <div class="table-responsive" *ngIf="!errorEmailResp">
                         <table class="table no-wrap">
                             <thead>
                                 <tr>

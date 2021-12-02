@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResponsableServiceService } from 'src/app/Responsables/Services/responsable-service.service';
 import { ActiviteServiceService } from '../Services/activite-service.service';
+import { Message } from "primeng/api";
 
 @Component({
   selector: 'app-ajout-responsable-activite',
@@ -10,13 +11,25 @@ import { ActiviteServiceService } from '../Services/activite-service.service';
   styleUrls: ['./ajout-responsable-activite.component.scss']
 })
 export class AjoutResponsableActiviteComponent implements OnInit {
+  responsables = {nom: '', prenom: '', telephone: '', email: '', domaine: '',type:''}
   id: any;
   activite: any;
   respons: any;
   responsable: any;
   logActivite: any;
+<<<<<<< HEAD
   responsableParActivite: any;
   errorEmailResp: any;
+=======
+  logActivite2: any;
+  responsableParActivite: any;
+  responsableParRes: any;
+  
+  errorEmailResp!: Message[];
+  errorEmailResp1!: Message[];
+  respExistant: any;
+  res: any;
+>>>>>>> 37a2c7d8bb60ed149473f819ec2903d717ab94c2
 
   constructor(
     private service: ActiviteServiceService,
@@ -33,8 +46,18 @@ export class AjoutResponsableActiviteComponent implements OnInit {
 
     this.service.ResponsableParActivite(this.id).subscribe((data:any)=>{
       this.responsableParActivite = data;
+<<<<<<< HEAD
       console.log(this.responsableParActivite);
     })
+=======
+    });
+
+    this.serviceResponsable.listeResponsable().subscribe((data: any)=>{
+        this.responsableParRes = data;
+          console.log(this.responsableParRes);
+    });
+    
+>>>>>>> 37a2c7d8bb60ed149473f819ec2903d717ab94c2
   }
 
   ajoutResponsables(form: NgForm){
@@ -47,6 +70,7 @@ export class AjoutResponsableActiviteComponent implements OnInit {
                     "etat": "active",
                     "type": form.value['type'],
                   };
+<<<<<<< HEAD
   for(let i=0; i<this.responsableParActivite.length; i++){
     if(this.responsableParActivite[i].activite.email == form.value['email']){
       this.errorEmailResp = "Ce Responsable existe déjà !"
@@ -60,6 +84,55 @@ export class AjoutResponsableActiviteComponent implements OnInit {
       //   })
       
       // });
+=======
+
+  for(let i=0; i<this.responsableParActivite.length; i++){    
+    if(this.responsableParActivite[i].responsable.email == form.value['email']){
+      this.errorEmailResp = [{detail: "Ce Responsable est déjà affecté à cet activité !"}];
+      console.log(this.errorEmailResp);
+    }
+  }
+
+  for(let i=0; i<this.responsableParRes.length; i++){    
+    if(this.responsableParRes[i].email == form.value['email']){
+      this.errorEmailResp1 = [{detail: "Ce Responsable existe déjà !"}];
+      this.serviceResponsable.detailResponsable(this.responsableParRes[i].id_responsable).subscribe((data: any)=>{
+        console.log(data);
+        this.respExistant = data;
+      })
+      
+    }
+  }
+  
+  if(this.errorEmailResp1 != []){
+    if(this.errorEmailResp != []){
+      this.serviceResponsable.ajoutResponsale(this.respons).subscribe((data:any)=>{
+        this.responsable = data;
+          this.logActivite = {"responsable": this.responsable, "activite": this.activite}
+          this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
+            this.router.navigate(['liste-activite'])
+          })
+        });
+    }else{
+      this.errorEmailResp =  [{detail: "Ce Responsable est déjà affecté à cet activité !"}];
+    }
+  }else{
+    this.errorEmailResp1 = [{detail: "Ce Responsable existe déjà !"}];
+  }
+  }
+
+  affecterResp(data: any){
+    this.serviceResponsable.detailResponsable(data).subscribe((datas: any)=>{
+      this.res = datas;
+      this.logActivite2 = {"responsable": this.res, "activite": this.activite};
+      this.service.AjoutLog(this.logActivite2).subscribe((log: any)=>{
+        this.router.navigateByUrl('detail-activite/'+ this.activite.id_activite, {skipLocationChange: true}).then(()=>
+        this.router.navigate(['detail-activite', this.activite.id_activite])); 
+      })
+    })
+    
+    
+>>>>>>> 37a2c7d8bb60ed149473f819ec2903d717ab94c2
   }
 
 }

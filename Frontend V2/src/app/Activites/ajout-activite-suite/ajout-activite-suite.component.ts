@@ -17,6 +17,10 @@ export class AjoutActiviteSuiteComponent implements OnInit {
   coche: any = [];
   logActivite: any;
   searchText= '';
+  responsableParActivite: any;
+  tabError: any = [];
+  tabSuccess: any = [];
+  emailResp: any = [];
 
   constructor(
     private service: ActiviteServiceService,
@@ -32,6 +36,10 @@ export class AjoutActiviteSuiteComponent implements OnInit {
     });
     this.serviceResponsable.listeResponsable().subscribe((data: any)=>{
       this.responsables = data;
+    });
+
+    this.service.ResponsableParActivite(this.id).subscribe((data:any)=>{
+      this.responsableParActivite = data;
     });
   }
 
@@ -51,13 +59,24 @@ export class AjoutActiviteSuiteComponent implements OnInit {
   
 
   addListe(form: NgForm){
-    console.log("Formmmmmmm",this.selected[0]);
+    //console.log("Formmmmmmm",this.selected[0]);
+     for(let j =0; j<this.responsableParActivite.length; j ++){
+       this.emailResp.push(this.responsableParActivite[j].responsable.email)
+     }
+     //console.log(this.emailResp);
+    
     for(let i = 0; i<this.selected.length; i ++){
-      this.logActivite = {"responsable": this.selected[i], "activite": this.activite};
-      this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
-        this.router.navigate(['liste-activite']);
+      if(this.emailResp.includes(this.selected[i].email)){
+        this.tabError.push('erreur '+ this.selected[i].nom + '' + this.selected[i].nom + ' est déjà affecté à cet activité');
+      }else{
+        this.logActivite = {"responsable": this.selected[i], "activite": this.activite};
+        this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
+          this.tabSuccess.push('succès '+ this.selected[i].nom + '' + this.selected[i].nom + ' est affecté avec succès');
+        //this.router.navigate(['liste-activite']);
       })
+      } 
     }
+   // console.log(this.tabError);
   }
 
 }

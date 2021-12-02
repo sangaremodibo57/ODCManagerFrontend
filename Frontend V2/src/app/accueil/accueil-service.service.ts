@@ -15,7 +15,12 @@ export class AccueilServiceService {
   public getHomme(){
     return this.http.get(this.url+'/participantGenre=Homme');
   }
+  
   public getFemme(){
     return this.http.get(this.url+'/participantGenre=Femme');
+  }
+
+  listeExercice(){
+    return this.http.get(this.url+'/listeExercice');
   }
 }

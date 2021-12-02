@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActiviteServiceService } from '../Activites/Services/activite-service.service';
 import { AccueilServiceService } from './accueil-service.service';
 import { Chart} from 'chart.js';
+import { ExerciceServiceService } from '../Exercices/Services/exercice-service.service';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { Chart} from 'chart.js';
   styleUrls: ['./accueil.component.scss']
 })
 export class AccueilComponent implements OnInit {
+  listeExo : any;
   // --------------------------
   canvas: any;
   ctx: any;
@@ -48,10 +50,11 @@ export class AccueilComponent implements OnInit {
   constructor(
     private mService: AccueilServiceService,
     private  acservice : ActiviteServiceService,
+    private service: ExerciceServiceService
+
     ) { }
 
   ngOnInit() {
-
     this.ActiviteOfDate();
     this.mService.getHomme().subscribe(
       (result) => {
@@ -67,11 +70,13 @@ export class AccueilComponent implements OnInit {
     console.log(this.totalFemme);
   }
 
+
   ActiviteOfDate(){
     return this.acservice.getAllList().subscribe((data)=>{
       this.listeAct = data;
     })
   }
+
 
   getMonth(date:any) {
     this.acservice.Month(date.mois).subscribe((data)=> {
@@ -80,4 +85,18 @@ export class AccueilComponent implements OnInit {
     })
   }
 
+
+  getAll(){
+    this.acservice.getAllList().subscribe((data:any)=> {
+      this.listes = data;
+      console.log('-----------' ,data.length);
+    })
+  }
+
+
+  listeExercices(){
+    this.service.listeExercice().subscribe((datas:any)=>{
+      this.listeExo = datas;
+    })
+  }
 }

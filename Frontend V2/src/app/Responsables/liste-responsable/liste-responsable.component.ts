@@ -19,18 +19,26 @@ export class ListeResponsableComponent implements OnInit {
     this.listesResponsables();
   }
 
+
+
   async listesResponsables(){
-    return this.service.listeResponsable().subscribe((data : any)=>{
-      this.listeRespon= data ;   
+    return this.service.listeResponsable().subscribe((data: any)=>{
+
+        this.listeRespon=data;
+      
     })
   }
 
   deleteResp(data: any){
-    this.service.deleteResponsable(data).subscribe((datas: any)=>{
-      window.location.reload();
+    this.service.detailResponsable(data).subscribe((datas: any)=>{
+      datas.etat = "inactive";
+      let datasMod = datas;
+      console.log(datasMod);
+      this.service.modifierResponsable(datasMod.id, datasMod).subscribe((mod: any)=>{
+        window.location.reload();
       this.router.navigateByUrl('/liste-responsable', {skipLocationChange: true}).then(()=>
       this.router.navigate(['liste-responsable'])); 
+      })
     })
   }
-
 }

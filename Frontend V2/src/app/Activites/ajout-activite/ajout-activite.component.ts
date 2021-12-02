@@ -52,7 +52,6 @@ error= '';
           if(this.exercice.date_debut <= form.value.dateDebut && this.exercice.date_fin >= form.value.dateFin){
             this.service.Ajout(this.activite).subscribe((data: any)=> {
               console.log(data);
-              console.log(this.exercice.date_debut);
               this.router.navigate(['ajout-activite-suite', data.id_activite]);
             })
           }else{

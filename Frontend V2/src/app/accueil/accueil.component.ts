@@ -16,6 +16,9 @@ export class AccueilComponent implements OnInit {
   canvas: any;
   ctx: any;
   @ViewChild('mychart') mychart:any;
+  canva: any;
+  ctxs: any;
+  @ViewChild('mycharts') mycharts:any;
 
   ngAfterViewInit() {
     this.canvas = this.mychart.nativeElement; 
@@ -38,6 +41,27 @@ export class AccueilComponent implements OnInit {
             borderColor: "#007ee7",
             fill: true,
         }],
+          labels: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre']
+      },
+  });
+  
+
+
+
+
+    this.canva = this.mycharts.nativeElement; 
+    this.ctxs = this.canva.getContext('2d');
+
+    new Chart(this.ctxs, {
+      type: 'bar',
+      data: {
+          datasets: [{
+              label: 'Femme',
+              data: [0, 20, 40, 30,  20, 40, 30],
+              backgroundColor: "rgb(223, 91, 4)",
+              borderColor: "#007ee7",
+              fill: true,
+          }],
           labels: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre']
       },
   });

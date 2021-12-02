@@ -37,6 +37,9 @@ import { ListeRoleComponent } from './Role/liste-role/liste-role.component';
 import { AjoutActiviteSuiteComponent } from './Activites/ajout-activite-suite/ajout-activite-suite.component';
 import { AjoutResponsableActiviteComponent } from './Activites/ajout-responsable-activite/ajout-responsable-activite.component';
 import { AjoutParticipantFichierComponent } from './Participants/ajout-participant-fichier/ajout-participant-fichier.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 @NgModule({
@@ -81,6 +84,8 @@ import { AjoutParticipantFichierComponent } from './Participants/ajout-participa
     HttpClientModule,
     FormsModule,
     Ng2SearchPipeModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

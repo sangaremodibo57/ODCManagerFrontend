@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 import { from } from 'rxjs';
 import { ExerciceServiceService } from 'src/app/Exercices/Services/exercice-service.service';
 import { Activite } from 'src/app/Models/Activite';
@@ -25,6 +26,7 @@ error= '';
     private service: ActiviteServiceService,
     private serviceExercice: ExerciceServiceService,
     private router: Router,
+    private toast: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -54,14 +56,21 @@ error= '';
               this.router.navigate(['ajout-activite-suite', data.id_activite]);
             })
           }else{
-            this.error = "Les dates de début et de fin de l'activité doivent être dans l'intervale de celles de l'exercice";
+            this.showToas();
           }
           
         })
       }
       else{
-        this.erreur = 'La date de debut doit être inferieure à la date de fin';
+        this.showToast();
     }
   }
+  }
+
+  showToast() {
+    this.toast.error('La date de debut doit être inferieure à la date de fin')
+  }
+  showToas() {
+    this.toast.error("Les dates de l'activité doivent être dans l'année de l'exercice")
   }
 }

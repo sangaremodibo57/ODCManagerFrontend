@@ -18,19 +18,20 @@ export class AccueilComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.getAll();
     this.ActiviteOfDate();
     this.mService.getHomme().subscribe(
       (result) => {
         this.totalHomme = result
+        console.log(this.totalHomme);
+        
       }
     );
-    this.totalFemme = this.mService.getFemme().subscribe(
-      (result) => {
-        this.totalHomme = result
-      }
-    );
-    console.log(this.totalHomme);
-    console.log(this.totalFemme);
+    this.mService.getFemme().subscribe((data)=>{
+      this.totalFemme = data
+      console.log('Femme',this.totalFemme);
+      
+    });
   }
 
   ActiviteOfDate(){
@@ -42,7 +43,14 @@ export class AccueilComponent implements OnInit {
    getMonth(date:any) {
     this.acservice.Month(date.mois).subscribe((data)=> {
       this.listes = data;
-      console.log(data);
+      
+    })
+  }
+
+  getAll(){
+    this.acservice.getAllList().subscribe((data:any)=> {
+      this.listes = data;
+      console.log('-----------' ,data.length);
     })
   }
 

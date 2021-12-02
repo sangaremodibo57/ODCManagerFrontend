@@ -28,7 +28,7 @@
                                 <div class="col-md-12 border-bottom p-0">
                                     <input type="text" placeholder="Saisissez votre nom de famille"
                                         class="form-control p-0 border-0" name="nom" 
-                                        required pattern="[a-zA-Z]"  [(ngModel)]="admins.nom" #nom="ngModel" autocomplete="off">
+                                        required pattern="[a-zA-Z]+"  [(ngModel)]="admins.nom" #nom="ngModel" autocomplete="off">
                                 </div>
                                 <p *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert">
                                     <b *ngIf="nom.errors?.['required']">
@@ -44,7 +44,7 @@
                                 <div class="col-md-12 border-bottom p-0">
                                     <input type="text" placeholder="Saisissez votre prénom"
                                     class="form-control p-0 border-0" name="prenom" 
-                                    required pattern="[a-zA-Z]"  [(ngModel)]="admins.prenom" #prenom="ngModel" autocomplete="off">
+                                    required pattern="[a-zA-Z]+"  [(ngModel)]="admins.prenom" #prenom="ngModel" autocomplete="off">
                                 </div>
                                 <p *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="alert">
                                     <b *ngIf="prenom.errors?.['required']">
@@ -60,7 +60,7 @@
                                 <div class="col-md-12 border-bottom p-0">
                                     <input type="text" placeholder=" 70 00 00 00"
                                     class="form-control p-0 border-0" name="telephone" 
-                                    required pattern="[0-9]{8}"  [(ngModel)]="admins.telephone" #telephone="ngModel" autocomplete="off">
+                                    required pattern="[0-9]{8}"  [(ngModel)]="admins.telephone" #telephone="ngModel" maxlength="8" minlength="8" autocomplete="off">
                                 </div>
                                 <p *ngIf="telephone.invalid && (telephone.dirty || telephone.touched)" class="alert">
                                     <b *ngIf="telephone.errors?.['required']">
@@ -76,7 +76,8 @@
                                 <div class="col-md-12 border-bottom p-0">
                                     <input type="email" placeholder="exemple@gmail.com"
                                     class="form-control p-0 border-0" name="email"
-                                    id="example-email" required [(ngModel)]="admins.email" #email="ngModel" autocomplete="off">
+                                    id="example-email" required [(ngModel)]="admins.email" #email="ngModel" autocomplete="off"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                 </div>
                                 <p *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
                                     <b *ngIf="email.errors?.['required']">

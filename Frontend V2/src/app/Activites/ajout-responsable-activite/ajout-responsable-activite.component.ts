@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResponsableServiceService } from 'src/app/Responsables/Services/responsable-service.service';
 import { ActiviteServiceService } from '../Services/activite-service.service';
+import { Message } from "primeng/api";
 
 @Component({
   selector: 'app-ajout-responsable-activite',
@@ -10,15 +11,18 @@ import { ActiviteServiceService } from '../Services/activite-service.service';
   styleUrls: ['./ajout-responsable-activite.component.scss']
 })
 export class AjoutResponsableActiviteComponent implements OnInit {
+  responsables = {nom: '', prenom: '', telephone: '', email: '', domaine: '',type:''}
   id: any;
   activite: any;
   respons: any;
   responsable: any;
   logActivite: any;
+  logActivite2: any;
   responsableParActivite: any;
   responsableParRes: any;
-  errorEmailResp: any;
-  errorEmailResp1: any;
+  
+  errorEmailResp!: Message[];
+  errorEmailResp1!: Message[];
   respExistant: any;
   res: any;
 
@@ -42,7 +46,8 @@ export class AjoutResponsableActiviteComponent implements OnInit {
     this.serviceResponsable.listeResponsable().subscribe((data: any)=>{
         this.responsableParRes = data;
           console.log(this.responsableParRes);
-    })
+    });
+    
   }
 
   ajoutResponsables(form: NgForm){
@@ -58,14 +63,14 @@ export class AjoutResponsableActiviteComponent implements OnInit {
 
   for(let i=0; i<this.responsableParActivite.length; i++){    
     if(this.responsableParActivite[i].responsable.email == form.value['email']){
-      this.errorEmailResp = "Ce Responsable est déjà affecté à cet activité !"
+      this.errorEmailResp = [{detail: "Ce Responsable est déjà affecté à cet activité !"}];
       console.log(this.errorEmailResp);
     }
   }
 
   for(let i=0; i<this.responsableParRes.length; i++){    
     if(this.responsableParRes[i].email == form.value['email']){
-      this.errorEmailResp1 = "Ce Responsable existe déjà !";
+      this.errorEmailResp1 = [{detail: "Ce Responsable existe déjà !"}];
       this.serviceResponsable.detailResponsable(this.responsableParRes[i].id_responsable).subscribe((data: any)=>{
         console.log(data);
         this.respExistant = data;
@@ -74,8 +79,8 @@ export class AjoutResponsableActiviteComponent implements OnInit {
     }
   }
   
-  if(this.errorEmailResp1 != ''){
-    if(this.errorEmailResp != ''){
+  if(this.errorEmailResp1 != []){
+    if(this.errorEmailResp != []){
       this.serviceResponsable.ajoutResponsale(this.respons).subscribe((data:any)=>{
         this.responsable = data;
           this.logActivite = {"responsable": this.responsable, "activite": this.activite}
@@ -84,17 +89,21 @@ export class AjoutResponsableActiviteComponent implements OnInit {
           })
         });
     }else{
-      this.errorEmailResp = "Ce responsable est déjà affecté à cet activité !"
+      this.errorEmailResp =  [{detail: "Ce Responsable est déjà affecté à cet activité !"}];
     }
   }else{
-    this.errorEmailResp1 = "Ce responsable existe déjà !";
+    this.errorEmailResp1 = [{detail: "Ce Responsable existe déjà !"}];
   }
   }
 
   affecterResp(data: any){
     this.serviceResponsable.detailResponsable(data).subscribe((datas: any)=>{
       this.res = datas;
-      console.log(this.res);
+      this.logActivite2 = {"responsable": this.res, "activite": this.activite};
+      this.service.AjoutLog(this.logActivite2).subscribe((log: any)=>{
+        this.router.navigateByUrl('detail-activite/'+ this.activite.id_activite, {skipLocationChange: true}).then(()=>
+        this.router.navigate(['detail-activite', this.activite.id_activite])); 
+      })
     })
     
     

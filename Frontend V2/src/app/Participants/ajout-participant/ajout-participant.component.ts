@@ -15,6 +15,7 @@ export class AjoutParticipantComponent implements OnInit {
   id: any;
   activite: any;
   participation: any;
+  participation2: any;
   emailParticipant: any = [];
   emailParticipantPart: any = [];
   errorPart1 = '';
@@ -83,8 +84,17 @@ export class AjoutParticipantComponent implements OnInit {
        }
       
     });
-  });
-    
+  });   
+  }
+
+  affecterParticipant(data: any){
+    this.service.detailParticipant(data).subscribe((datas: any)=>{
+      this.participation2 = {"participant": datas, "activite": this.activite};
+      this.serviceAct.AjoutParticipation(this.participation2).subscribe((data: any)=>{
+        this.router.navigateByUrl('detail-activite/'+ this.activite.id_activite, {skipLocationChange: true}).then(()=>
+        this.router.navigate(['detail-activite', this.activite.id_activite])); 
+      })
+     })
   }
 
 }

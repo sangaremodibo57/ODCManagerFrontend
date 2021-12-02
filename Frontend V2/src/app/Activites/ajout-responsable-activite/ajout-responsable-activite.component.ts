@@ -104,9 +104,7 @@ export class AjoutResponsableActiviteComponent implements OnInit {
         this.router.navigateByUrl('detail-activite/'+ this.activite.id_activite, {skipLocationChange: true}).then(()=>
         this.router.navigate(['detail-activite', this.activite.id_activite])); 
       })
-    })
-    
-    
+    })  
   }
 
 }

@@ -24,11 +24,13 @@
                         <form #AjoutForm="ngForm" (ngSubmit)="AjoutActivite(AjoutForm)" class="form-horizontal form-material">
                             <div class="form-group mb-4">
                                 <p style="color: red; text-align: center;"><b>{{erreur}}</b></p>
+
+                                <p style="color: red; text-align: center;"><b>{{error}}</b></p>
                                 <label class="col-md-12 p-0">Exercice *</label>
                                 <div class="col-md-12 border-bottom p-0">
                                         <select  class="form-control p-0 border-0" name="exercice" id="singleSelect" ngModel #exercice="ngModel" required>
                                             <option value="">---Sélectionner un exercice---</option> 
-                                            <option *ngFor="let exo of listeExo" value={{exo.id}}>Exercice {{exo.annee}}</option>
+                                            <option *ngFor="let exo of listeExo" value={{exo.id}}>{{exo.annee}}</option>
                                         </select>
                                         <div [hidden]="exercice.valid || exercice.pristine" class="alert alert-danger">
                                             L'exercice est obligatoire

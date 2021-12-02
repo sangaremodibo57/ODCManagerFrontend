@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { from } from 'rxjs';
 import { ExerciceServiceService } from 'src/app/Exercices/Services/exercice-service.service';
 import { Activite } from 'src/app/Models/Activite';
 import { Exercice } from 'src/app/Models/Exercice';
@@ -18,6 +19,7 @@ activite = new Activite();
 idExo: any;
 exercice: any;
 erreur= '';
+error= '';
 
   constructor(
     private service: ActiviteServiceService,
@@ -34,7 +36,7 @@ erreur= '';
 
   AjoutActivite(form:NgForm) {
     if(form.valid){
-      if(moment(form.value['dateDebut']).isBefore(form.value['dateFin'])) {
+      if(form.value.dateDebut <= form.value.dateFin) {
         this.idExo = form.value['exercice'];
         this.serviceExercice.detailExercice(this.idExo).subscribe((data:any)=>{
           this.exercice =  data;
@@ -45,10 +47,16 @@ erreur= '';
           this.activite.type = form.value['type'];
           this.activite.etat = 'active';
           this.activite.exercice = this.exercice;
-          this.service.Ajout(this.activite).subscribe((data: any)=> {
-            console.log(data);
-            this.router.navigate(['ajout-activite-suite', data.id_activite]);
-          })
+          if(this.exercice.date_debut <= form.value.dateDebut && this.exercice.date_fin >= form.value.dateFin){
+            this.service.Ajout(this.activite).subscribe((data: any)=> {
+              console.log(data);
+              console.log(this.exercice.date_debut);
+              this.router.navigate(['ajout-activite-suite', data.id_activite]);
+            })
+          }else{
+            this.error = "Les dates de début et de fin de l'activité doivent être dans l'intervale de celles de l'exercice";
+          }
+          
         })
       }
       else{

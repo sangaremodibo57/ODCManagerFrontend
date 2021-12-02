@@ -29,7 +29,7 @@ export class AjoutActiviteSuiteComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.id = this.route.snapshot.params['id'];
     this.service.detail(this.id).subscribe((data: any)=>{
       this.activite = data;
@@ -67,11 +67,11 @@ export class AjoutActiviteSuiteComponent implements OnInit {
     
     for(let i = 0; i<this.selected.length; i ++){
       if(this.emailResp.includes(this.selected[i].email)){
-        this.tabError.push('erreur '+ this.selected[i].nom + '' + this.selected[i].nom + ' est déjà affecté à cet activité');
+        this.tabError.push('erreur '+ this.selected[i].prenom + ' ' + this.selected[i].nom + ' est déjà affecté à cet activité');
       }else{
         this.logActivite = {"responsable": this.selected[i], "activite": this.activite};
         this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
-          this.tabSuccess.push('succès '+ this.selected[i].nom + '' + this.selected[i].nom + ' est affecté avec succès');
+          this.tabSuccess.push('succès '+ this.selected[i].prenom + ' ' + this.selected[i].nom + ' est affecté avec succès');
         //this.router.navigate(['liste-activite']);
       })
       } 

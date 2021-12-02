@@ -30,12 +30,12 @@
                                 </div>
                                 <p *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert">
                                     <b *ngIf="nom.errors?.['required']">
-                                        Le nom est obligatoire !
+                                          Le nom est obligatoire !
                                     </b>
                                     <b *ngIf="nom.errors?.['pattern']">
                                         Le nom doit être composé que des lettres !
                                     </b>
-                                </p>
+                                  </p>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="example-email" class="col-md-12 p-0">PRENOM</label>
@@ -45,12 +45,12 @@
                                 </div>
                                 <p *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="alert">
                                     <b *ngIf="prenom.errors?.['required']">
-                                        Le prénom est obligatoire !
+                                          Le prénom est obligatoire !
                                     </b>
                                     <b *ngIf="nom.errors?.['pattern']">
                                         Le prénom doit être composé que des lettres !
                                     </b>
-                                </p>
+                                  </p>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="example-email" class="col-md-12 p-0">TELEPHONE</label>
@@ -82,6 +82,7 @@
                                         L'email doit être de type exemple@exemple.domaine !
                                     </b>
                                 </p>
+                                <p class="alert"><b>{{errorEmail}}</b></p>
                             </div>
                             <div class="form-group mb-4">
                                 <label class="col-md-12 p-0">Rôle</label>
@@ -111,6 +112,7 @@
                                         Le login doit être composé que des lettres !
                                     </b>
                                 </p>
+                                <p class="alert"><b>{{errorLogin}}</b></p>
                             </div>
                             <div class="form-group mb-4">
                                 <div class="col-sm-12 align-button">

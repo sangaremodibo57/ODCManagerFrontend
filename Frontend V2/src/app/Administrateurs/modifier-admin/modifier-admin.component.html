@@ -102,21 +102,7 @@
                                             </b>
                                         </p>
                                     </div>
-                                    <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">LOGIN</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="John22"
-                                            class="form-control p-0 border-0" required pattern="[a-zA-Z0-9]+" name="login" [(ngModel)]="admin.login" #login="ngModel">
-                                        </div>
-                                        <p *ngIf="login.invalid && (login.dirty || login.touched)" class="alert">
-                                            <b *ngIf="login.errors?.['required']">
-                                                Le login est obligatoire !
-                                            </b>
-                                            <b *ngIf="login.errors?.['pattern']">
-                                                Le login doit être composé que des lettres !
-                                            </b>
-                                        </p>
-                                    </div>
+                                    
                                     <div class="form-group mb-4">
                                         <div class="col-sm-12 align-button">
                                             <button class="btn btn-warning" type="submit">Modifier</button>

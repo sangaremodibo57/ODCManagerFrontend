@@ -51,12 +51,7 @@ export class AccueilComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-// ---------------------------
 
-
-
-
-    // --------------------------
     this.ActiviteOfDate();
     this.mService.getHomme().subscribe(
       (result) => {

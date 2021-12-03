@@ -68,14 +68,17 @@
                                     <td>
                                         <span class="text-success alignement">
                                             <a [routerLink]="['/modifier-activite', liste.id_activite]"> <i class="fa fa-edit" aria-hidden="true"></i></a>
-                                            <a (click)="deleteActivivite(liste.id_activite)"><i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick ="return(confirm('Etes-vous certain de vouloir supprimer cette activité ?'));"></i></a>
+                                            <a (click)="deleteActivivite(liste.id_activite)"><i style="color: red;" class="fa fa-trash" aria-hidden="true" angularConfirmModal
+                                                [message]="'Etes-vous sûr de supprimer cette activité ?'"
+                                                [options]="options"
+                                                (onConfirm)="confirmed()"
+                                                (onCancel)="cancelled()"></i></a>
                                             <a [routerLink]="['/detail-activite', liste.id_activite]"><i style="color: #03224c;" class="fas fa-info-circle" aria-hidden="true"></i></a>
                                          </span>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button mat-raised-button (click)="openDialog()">Pick one</button>
                     </div>
                 </div>
             </div>

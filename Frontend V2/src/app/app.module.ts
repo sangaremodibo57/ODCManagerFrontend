@@ -39,7 +39,7 @@ import { AjoutResponsableActiviteComponent } from './Activites/ajout-responsable
 import { AjoutParticipantFichierComponent } from './Participants/ajout-participant-fichier/ajout-participant-fichier.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import {MatDialogModule} from '@angular/material/dialog';
+import { AngularConfirmModalModule } from 'angular-confirm-modal';
 
 
 
@@ -88,8 +88,18 @@ import {MatDialogModule} from '@angular/material/dialog';
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    MatDialogModule
+    AngularConfirmModalModule.forRoot({
+      //optional global config
+   
+      //confirmBtnClass: 'btn btn-success',
+      //confirmBtnText: 'Confirm',
+      //cancelBtnClass: 'btn btn-danger',
+      //cancelBtnText: 'Cancel',
+      //modalSize: 'lg',
+      //modalClass: 'some-modal-class'
+     })
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ActiviteServiceService } from '../Services/activite-service.service';
 
@@ -11,11 +10,19 @@ import { ActiviteServiceService } from '../Services/activite-service.service';
 export class ListeActiviteComponent implements OnInit {
   listes:any;
   searchText= '';
+
+  options: any = {
+    confirmBtnClass: 'btn btn-success',      //DEFAULT VALUE
+   confirmBtnText: 'Oui',      				//DEFAULT VALUE
+   cancelBtnClass: 'btn btn-danger',      //DEFAULT VALUE
+   cancelBtnText: 'Non',      				//DEFAULT VALUE
+   modalSize: 'lg',      							 //DEFAULT VALUE
+   modalClass: ''      								//DEFAULT VALUE
+  }
   
   constructor(
     private service : ActiviteServiceService,
     private router : Router,
-    private dialog: MatDialog
 
   ) { }
 
@@ -52,15 +59,11 @@ export class ListeActiviteComponent implements OnInit {
     })
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ListeActiviteComponent, {
-      width: '50px',
-     
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
+  confirmed() {
+    console.log('confirmed');
+   }
+  
+   cancelled() {
+    console.log('cancelled');
+   }
 }

@@ -17,6 +17,7 @@ type AOA = any[][];
 export class AjoutParticipantFichierComponent implements OnInit {
   participant:any;
   participation: any;
+  listeParticipant: any;
   id: any;
   activite: any;
   spinnerEnabled=false;
@@ -155,6 +156,11 @@ export class AjoutParticipantFichierComponent implements OnInit {
   }
 
   ajoutFichier(){
+
+       //recuperation des participants
+       this.service.listeparticipant().subscribe((datas: any)=>{
+        this.listeParticipant = datas;})
+
     for(let i=0; i<this.datas.length; i++){
       // console.log(this.data[i]);
       this.participants.push({
@@ -168,7 +174,7 @@ export class AjoutParticipantFichierComponent implements OnInit {
     }
     console.log(this.participants);
     this.manyPart.participant=this.participants;
-    console.log("plusieurs part", this.manyPart);
+    //console.log("plusieurs part", this.manyPart);
 
     this.service.ajoutParticipantExcel(this.participants).subscribe((data:any)=>{
       for(let i=0; i< data.length; i++){

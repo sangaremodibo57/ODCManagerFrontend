@@ -17,6 +17,10 @@ export class AjoutActiviteSuiteComponent implements OnInit {
   coche: any = [];
   logActivite: any;
   searchText= '';
+  responsableParActivite: any;
+  tabError: any = [];
+  tabSuccess: any = [];
+  emailResp: any = [];
 
   constructor(
     private service: ActiviteServiceService,
@@ -25,13 +29,17 @@ export class AjoutActiviteSuiteComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.id = this.route.snapshot.params['id'];
     this.service.detail(this.id).subscribe((data: any)=>{
       this.activite = data;
     });
     this.serviceResponsable.listeResponsable().subscribe((data: any)=>{
       this.responsables = data;
+    });
+
+    this.service.ResponsableParActivite(this.id).subscribe((data:any)=>{
+      this.responsableParActivite = data;
     });
   }
 
@@ -51,12 +59,22 @@ export class AjoutActiviteSuiteComponent implements OnInit {
   
 
   addListe(form: NgForm){
-    console.log("Formmmmmmm",this.selected[0]);
+    //console.log("Formmmmmmm",this.selected[0]);
+     for(let j =0; j<this.responsableParActivite.length; j ++){
+       this.emailResp.push(this.responsableParActivite[j].responsable.email)
+     }
+
+     //Verifi si l'email est existant
     for(let i = 0; i<this.selected.length; i ++){
-      this.logActivite = {"responsable": this.selected[i], "activite": this.activite};
-      this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
-        this.router.navigate(['liste-activite']);
+      if(this.emailResp.includes(this.selected[i].email)){
+        this.tabError.push('erreur '+ this.selected[i].prenom + ' ' + this.selected[i].nom + ' est déjà affecté à cet activité');
+      }else{
+        this.logActivite = {"responsable": this.selected[i], "activite": this.activite};
+        this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
+          this.tabSuccess.push('succès '+ this.selected[i].prenom + ' ' + this.selected[i].nom + ' est affecté avec succès');
+        //this.router.navigate(['liste-activite']);
       })
+      } 
     }
   }
 

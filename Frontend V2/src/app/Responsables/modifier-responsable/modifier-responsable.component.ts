@@ -8,7 +8,7 @@ import { ResponsableServiceService } from '../Services/responsable-service.servi
   styleUrls: ['./modifier-responsable.component.scss']
 })
 export class ModifierResponsableComponent implements OnInit {
-  // admins = {nom: '', prenom: '', telephone: '', email: '', domaine: '',type:''}
+  
   idResp : any;
   respons : any;
   constructor(

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ResponsableServiceService } from 'src/app/Responsables/Services/responsable-service.service';
 import { ActiviteServiceService } from '../Services/activite-service.service';
 
@@ -22,7 +23,8 @@ export class AjoutActiviteSuiteComponent implements OnInit {
     private service: ActiviteServiceService,
     private serviceResponsable: ResponsableServiceService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toast: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -56,8 +58,13 @@ export class AjoutActiviteSuiteComponent implements OnInit {
       this.logActivite = {"responsable": this.selected[i], "activite": this.activite};
       this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
         this.router.navigate(['liste-activite']);
+        this.ajout();
       })
     }
+  }
+
+  ajout(){
+    this.toast.success("Activité ajoutée avec succès")
   }
 
 }

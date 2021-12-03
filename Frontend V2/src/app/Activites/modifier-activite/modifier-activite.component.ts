@@ -54,6 +54,7 @@ export class ModifierActiviteComponent implements OnInit {
             this.service.update(this.id, this.activite).subscribe((res)=> {
               console.log(res);
               this.route.navigateByUrl('/liste-activite');
+              this.confirm();
             })
           }else{
             this.showToas();
@@ -72,5 +73,8 @@ export class ModifierActiviteComponent implements OnInit {
     }
     showToas() {
       this.toast.error("Les dates de l'activité doivent être dans l'année de l'exercice")
+    }
+    confirm(){
+      this.toast.success('Activité modifiée avec succès')
     }
   }

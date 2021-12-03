@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ActiviteServiceService } from '../Services/activite-service.service';
 
@@ -13,7 +14,8 @@ export class ListeActiviteComponent implements OnInit {
   
   constructor(
     private service : ActiviteServiceService,
-    private router : Router
+    private router : Router,
+    private dialog: MatDialog
 
   ) { }
 
@@ -48,6 +50,17 @@ export class ListeActiviteComponent implements OnInit {
       this.listes = data;
       console.log(data);
     })
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ListeActiviteComponent, {
+      width: '50px',
+     
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

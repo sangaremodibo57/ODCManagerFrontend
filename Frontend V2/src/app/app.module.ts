@@ -39,6 +39,7 @@ import { AjoutResponsableActiviteComponent } from './Activites/ajout-responsable
 import { AjoutParticipantFichierComponent } from './Participants/ajout-participant-fichier/ajout-participant-fichier.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -86,7 +87,8 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

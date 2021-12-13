@@ -17,7 +17,9 @@ type AOA = any[][];
 export class AjoutParticipantFichierComponent implements OnInit {
   participant:any;
   participation: any;
-  listeParticipant: any;
+  listeParticipant:any =[];
+  emailParticipant: any = [];
+  participantExistant: any = [];
   id: any;
   activite: any;
   spinnerEnabled=false;
@@ -136,18 +138,7 @@ export class AjoutParticipantFichierComponent implements OnInit {
     }
     console.log(this.data[1]);
   }
-
-  // export(): void {
-	// 	/* generate worksheet */
-	// 	const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
-
-	// 	/* generate workbook and add the worksheet */
-	// 	const wb: XLSX.WorkBook = XLSX.utils.book_new();
-	// 	XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-	// 	/* save to file */
-	// 	XLSX.writeFile(wb, this.fileName);
-	// }
+  
 
   annuler(){
     window.location.reload();
@@ -158,41 +149,70 @@ export class AjoutParticipantFichierComponent implements OnInit {
   ajoutFichier(){
 
        //recuperation des participants
-       this.service.listeparticipant().subscribe((datas: any)=>{
-        this.listeParticipant = datas;})
+       this.service.listeparticipant().subscribe((dat: any)=>{
+        console.log(dat.length);
 
-    for(let i=0; i<this.datas.length; i++){
-      // console.log(this.data[i]);
-      this.participants.push({
-        nom_complet:this.datas[i].nom_complet,
-        telephone:this.datas[i].telephone,
-        domaine:this.datas[i].domaine,
-        structure:this.datas[i].structure,
-        email:this.datas[i].email,
-        participantGenre: this.datas[i].participant_genre,
-      });
-    }
-    console.log(this.participants);
-    this.manyPart.participant=this.participants;
-    //console.log("plusieurs part", this.manyPart);
+        //on recupère les mails des participants
+        for(let i=0; i<dat.length; i++){
+            this.emailParticipant.push(dat[i].email);
+        }
 
-    this.service.ajoutParticipantExcel(this.participants).subscribe((data:any)=>{
-      for(let i=0; i< data.length; i++){
-        this.participation = {'activite': this.activite, 'participant': data[i]}
-        this.serviceAct.AjoutParticipation(this.participation).subscribe((data:any)=>{
-         // window.location.reload();
-          this.router.navigateByUrl('detail-activite/'+ this.activite.id_activite, {skipLocationChange: true}).then(()=>
-          this.router.navigate(['detail-activite', this.activite.id_activite])); 
-        })
-      }
+      // console.log(this.emailParticipant);
+       
+        for(let i=0; i<this.datas.length; i++){
+          console.log(this.datas[i]);
 
-        console.log("insert....", data)
-    },
-    (err=>{
-      console.log("erreur...", err);
-      
-    })
-    )
+          //verifie si les mails des fichiers existe dans la bd
+          if (this.emailParticipant.includes(this.datas[i].email)){
+
+            //si oui, on l'enregistre dans participantExistant
+            this.participantExistant.push({
+              nom_complet:this.datas[i].nom_complet,
+              telephone:this.datas[i].telephone,
+              domaine:this.datas[i].domaine,
+              structure:this.datas[i].structure,
+              email:this.datas[i].email,
+              participantGenre: this.datas[i].participant_genre,
+            });
+            
+          }else{
+            //si non, on l'enregistre dans participants
+          this.participants.push({
+            nom_complet:this.datas[i].nom_complet,
+            telephone:this.datas[i].telephone,
+            domaine:this.datas[i].domaine,
+            structure:this.datas[i].structure,
+            email:this.datas[i].email,
+            participantGenre: this.datas[i].participant_genre,
+          });
+
+          }
+         
+        }
+
+   
+          console.log(this.participants);
+          this.manyPart.participant=this.participants;
+          //console.log("plusieurs part", this.manyPart);
+
+          this.service.ajoutParticipantExcel(this.participants).subscribe((data:any)=>{
+            for(let i=0; i< data.length; i++){
+              this.participation = {'activite': this.activite, 'participant': data[i]}
+              this.serviceAct.AjoutParticipation(this.participation).subscribe((data:any)=>{
+              // window.location.reload();
+                this.router.navigateByUrl('detail-activite/'+ this.activite.id_activite, {skipLocationChange: true}).then(()=>
+                this.router.navigate(['detail-activite', this.activite.id_activite])); 
+              })
+            }
+
+              console.log("insert....", data)
+          },
+          (err=>{
+            console.log("erreur...", err);
+            
+          })
+          )
+  });
   }
 
 }

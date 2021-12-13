@@ -9,8 +9,9 @@ export class LoginServiceService {
 
   constructor(private http: HttpClient) { }
 
-  public verifier(login: string, password: string) {
-    return this.http.get(this.host+"/login/"+login+"&"+password)
+  public verifier(data: any) {
+    console.log(data);
+    return this.http.post(this.host+'/authenticate', data)
   }
 
   public SetLogin(login: string) {

@@ -37,5 +37,4 @@ export class DetailActiviteComponent implements OnInit {
 
    
   }
-
 }

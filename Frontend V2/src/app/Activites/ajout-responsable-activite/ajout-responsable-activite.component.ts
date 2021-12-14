@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResponsableServiceService } from 'src/app/Responsables/Services/responsable-service.service';
 import { ActiviteServiceService } from '../Services/activite-service.service';
-import { Message } from "primeng/api";
 
 @Component({
   selector: 'app-ajout-responsable-activite',
@@ -109,5 +108,6 @@ export class AjoutResponsableActiviteComponent implements OnInit {
       })
     })  
   }
+
 
 }

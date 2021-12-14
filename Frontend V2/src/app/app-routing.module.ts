@@ -29,7 +29,6 @@ import { AjoutRoleComponent } from './Role/ajout-role/ajout-role.component';
 import { DetailRoleComponent } from './Role/detail-role/detail-role.component';
 import { ListeRoleComponent } from './Role/liste-role/liste-role.component';
 import { ModifierRoleComponent } from './Role/modifier-role/modifier-role.component';
-import { ProfilUserComponent } from './UserProfil/profil-user/profil-user.component';
 
 const routes: Routes = [
 
@@ -74,9 +73,7 @@ const routes: Routes = [
    { path: 'ajout-role', component: AjoutRoleComponent },
    { path: 'modifier-role/:id', component: ModifierRoleComponent },
    { path: 'detail-role/:id', component: DetailRoleComponent },
-
-    // Gestion UserProfil
-    { path: 'profil-user', component: ProfilUserComponent },
+ 
   
 ];
 

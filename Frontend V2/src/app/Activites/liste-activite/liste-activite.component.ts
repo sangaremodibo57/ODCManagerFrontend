@@ -10,10 +10,19 @@ import { ActiviteServiceService } from '../Services/activite-service.service';
 export class ListeActiviteComponent implements OnInit {
   listes:any;
   searchText= '';
+
+  options: any = {
+    confirmBtnClass: 'btn btn-success',      //DEFAULT VALUE
+   confirmBtnText: 'Oui',      				//DEFAULT VALUE
+   cancelBtnClass: 'btn btn-danger',      //DEFAULT VALUE
+   cancelBtnText: 'Non',      				//DEFAULT VALUE
+   modalSize: 'lg',      							 //DEFAULT VALUE
+   modalClass: ''      								//DEFAULT VALUE
+  }
   
   constructor(
     private service : ActiviteServiceService,
-    private router : Router
+    private router : Router,
 
   ) { }
 
@@ -50,4 +59,11 @@ export class ListeActiviteComponent implements OnInit {
     })
   }
 
+  confirmed() {
+    console.log('confirmed');
+   }
+  
+   cancelled() {
+    console.log('cancelled');
+   }
 }

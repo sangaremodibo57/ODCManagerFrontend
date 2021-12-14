@@ -43,8 +43,7 @@ export class AjoutParticipantComponent implements OnInit {
 
   onRegister(form: NgForm){
     
-    this.service.ajoutParticipant(form.value).subscribe((app: any) =>{
-      this.participant = app;
+   
 
       //recuperation des participants
       this.service.listeparticipant().subscribe((datas: any)=>{
@@ -75,16 +74,19 @@ export class AjoutParticipantComponent implements OnInit {
         }else{
 
           //si les  messages d'erreurs sont vides alors on enregistre l'apprenant et l'affecte à l'activité
+          this.service.ajoutParticipant(form.value).subscribe((app: any) =>{
+            this.participant = app;
           this.participation = {"participant": this.participant, "activite": this.activite};
           this.serviceAct.AjoutParticipation(this.participation).subscribe((data: any)=>{
           this.router.navigateByUrl('detail-activite/'+ this.activite.id_activite, {skipLocationChange: true}).then(()=>
           this.router.navigate(['detail-activite', this.activite.id_activite])); 
           })
+            });  
         }
        }
       
     });
-  });   
+ 
   }
 
   affecterParticipant(data: any){

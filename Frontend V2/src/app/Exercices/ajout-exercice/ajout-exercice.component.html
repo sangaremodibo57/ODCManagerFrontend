@@ -1,6 +1,5 @@
 <app-header></app-header>
 <app-side-menu></app-side-menu>
-
 <div class="page-wrapper">
     <div class="page-breadcrumb bg-white">
         <div class="row align-items-center sous-header">
@@ -25,11 +24,9 @@
                         <form class="form-horizontal form-material" #exo = "ngForm" (ngSubmit)="ajoutExercice(exo)">
                             <div class="form-group mb-4">
                                 <p style="color: red; text-align: center;"><b>{{erreur}}</b></p>
-                                <p style="color: red; text-align: center;"><b>{{erreurIsExo}}</b></p>
-                                
                                 <label class="col-md-12 p-0">Année</label>
                                 <div class="col-md-12 border-bottom p-0">
-                                    <input type="text" placeholder="Saisissez une année"
+                                    <input type="year" placeholder="Saisissez une année"
                                                 class="form-control p-0 border-0" name="annee" ngModel>
                                 </div>
                             </div>
@@ -57,7 +54,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-xlg-3 col-md-12"></div>
+
     </div>
 </div>
 </div>
-

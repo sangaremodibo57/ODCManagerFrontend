@@ -38,10 +38,5 @@ export class ExerciceServiceService {
       return this.http.get(this.url+"/activiteByAnnee="+ annee);
     }
 
-    //recherche par exercice
-    public RechercheExercice(annee:any) {
-      return this.http.get(this.url+"/ExerciceByYear="+ annee);
-    }
-
 
 }

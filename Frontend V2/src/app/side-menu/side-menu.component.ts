@@ -6,14 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-menu.component.scss']
 })
 export class SideMenuComponent implements OnInit {
-admin: any;
-adminConnect: any
+
   constructor() { }
 
   ngOnInit(): void {
-    this.admin =  localStorage.getItem('userData');
-    this.adminConnect = JSON.parse(this.admin)
-    //console.log("userConnect=======", this.adminConnect);
   }
 
 }

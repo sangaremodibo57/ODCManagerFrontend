@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onLogin(loginForm: any) {
-    this.service.verifier(loginForm)
+  onLogin(loginForm:any) {
+    this.service.verifier(loginForm.login, loginForm.password)
       .subscribe(
         (data:any)=> {
           if (data!=null) {

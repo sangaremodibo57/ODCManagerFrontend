@@ -18,4 +18,8 @@ export class AccueilServiceService {
   public getFemme(){
     return this.http.get(this.url+'/participantGenre=Femme');
   }
+
+  listeparticipant(){
+    return this.http.get(this.url + '/participants');
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ResponsableServiceService } from 'src/app/Responsables/Services/responsable-service.service';
 import { ActiviteServiceService } from '../Services/activite-service.service';
 
@@ -71,7 +72,9 @@ export class AjoutActiviteSuiteComponent implements OnInit {
       }else{
         this.logActivite = {"responsable": this.selected[i], "activite": this.activite};
         this.service.AjoutLog(this.logActivite).subscribe((log: any)=>{
-          this.tabSuccess.push('succès '+ this.selected[i].prenom + ' ' + this.selected[i].nom + ' est affecté avec succès');
+        this.router.navigateByUrl('detail-activite/'+ this.activite.id_activite, {skipLocationChange: true}).then(()=>
+        this.router.navigate(['detail-activite', this.activite.id_activite])); 
+         // this.tabSuccess.push(this.selected[i].prenom + ' ' + this.selected[i].nom + ' est affecté avec succès');
         //this.router.navigate(['liste-activite']);
       })
       } 

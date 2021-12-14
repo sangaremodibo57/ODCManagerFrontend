@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import{ HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { MessagesModule } from "primeng/messages";
-import { MessageModule } from "primeng/message";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,7 +37,11 @@ import { ListeRoleComponent } from './Role/liste-role/liste-role.component';
 import { AjoutActiviteSuiteComponent } from './Activites/ajout-activite-suite/ajout-activite-suite.component';
 import { AjoutResponsableActiviteComponent } from './Activites/ajout-responsable-activite/ajout-responsable-activite.component';
 import { AjoutParticipantFichierComponent } from './Participants/ajout-participant-fichier/ajout-participant-fichier.component';
-import { ProfilUserComponent } from './UserProfil/profil-user/profil-user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { AngularConfirmModalModule } from 'angular-confirm-modal';
+
+
 
 
 @NgModule({
@@ -76,7 +78,6 @@ import { ProfilUserComponent } from './UserProfil/profil-user/profil-user.compon
     AjoutActiviteSuiteComponent,
     AjoutResponsableActiviteComponent,
     AjoutParticipantFichierComponent,
-    ProfilUserComponent,
    
   ],
   imports: [
@@ -85,9 +86,20 @@ import { ProfilUserComponent } from './UserProfil/profil-user/profil-user.compon
     HttpClientModule,
     FormsModule,
     Ng2SearchPipeModule,
-    MessagesModule,
-    MessageModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    AngularConfirmModalModule.forRoot({
+      //optional global config
+   
+      //confirmBtnClass: 'btn btn-success',
+      //confirmBtnText: 'Confirm',
+      //cancelBtnClass: 'btn btn-danger',
+      //cancelBtnText: 'Cancel',
+      //modalSize: 'lg',
+      //modalClass: 'some-modal-class'
+     })
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
